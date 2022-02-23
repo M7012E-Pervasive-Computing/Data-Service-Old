@@ -6,7 +6,6 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
-COPY docs /usr/src/app/
 RUN npm install --only=production
 RUN cp -R node_modules prod_node_modules
 RUN npm install
@@ -28,8 +27,6 @@ WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app/package.json /usr/src/app/
 # Copy builded files to release container
 COPY --from=builder /usr/src/app/dist /usr/src/app/dist
-# Copy docs to release container
-COPY --from=builder /usr/src/app/docs /usr/src/app/docs
 # Copy prodution dependencies only
 COPY --from=builder /usr/src/app/prod_node_modules /usr/src/app/node_modules
 
