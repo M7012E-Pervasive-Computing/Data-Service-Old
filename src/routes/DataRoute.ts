@@ -14,8 +14,8 @@ export class DataRoute extends RouteSuperClass {
      * Defines what routes are available, and calls the associated functions.
      */
     configureRoutes() {
-        this.router.get('/:id', (req, res, next) => this.getData(req, res));
         this.router.get('/names', (req, res, next) => this.getNames(req, res));
+        this.router.get('/:id', (req, res, next) => this.getData(req, res));
         this.router.post('/', (req, res, next) => this.setData(req, res));
     }
 

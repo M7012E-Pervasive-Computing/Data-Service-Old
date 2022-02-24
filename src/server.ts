@@ -67,6 +67,7 @@ class Server {
             }
             return '\x1b[' + color + 'm' + status + '\x1b[0m';
         });
+        this.app.use(morgan(':date[iso] - :method :url - :statusColor - :response-time ms'));
     }
 
     public routes(): void {
