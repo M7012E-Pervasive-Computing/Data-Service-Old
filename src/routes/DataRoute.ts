@@ -44,6 +44,7 @@ export class DataRoute extends RouteSuperClass {
     public setData(req: express.Request, res: express.Response) {
         const data = req.body.data;
         if (!data || data.length <= 0) {
+            console.error('No data provided');
             res.status(400).json({
                 success: false,
                 message: 'No data provided'
@@ -52,6 +53,7 @@ export class DataRoute extends RouteSuperClass {
         }
         const name = req.body.name;
         if (!name || name === '' || name === 'names') {
+            console.error('No name provided');
             res.status(400).json({
                 success: false,
                 message: 'No name provided'
@@ -62,6 +64,7 @@ export class DataRoute extends RouteSuperClass {
         try {
             dataPointInterface = this.toDataPoint(data);
         } catch (err) {
+            console.log(err);
             res.status(400).json({
                 success: false,
                 message: err.message,
@@ -90,7 +93,7 @@ export class DataRoute extends RouteSuperClass {
     private toDataPoint(data: any): DataPointInterface[] {
         const returnData: DataPointInterface[] = [];
         for (const d of data) {
-            if (d.x && d.y && d.z) {
+            if (!isNaN(d.x) && !isNaN(d.x) && !isNaN(d.x)) {
                 returnData.push({
                     x: parseFloat(d.x),
                     y: parseFloat(d.y),
